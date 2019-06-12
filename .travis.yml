@@ -14,10 +14,9 @@ install:
   - yarn install --frozen-lockfile
 script:
   - yarn --version
-  - yarn test
   - yarn build
 after_success:
-  - yarn test:codacy-upload
+  - yarn --version
 deploy:
   provider: npm
   email: jenkins-reform@hmcts.net
