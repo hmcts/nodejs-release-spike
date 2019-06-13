@@ -17,6 +17,12 @@ script:
 - yarn build
 after_success:
 - yarn --version
+- git config --global user.email "travis@travis-ci.org"
+- git config --global user.name "Travis CI"
+- git remote add upstream "https://${GH_TOKEN}@github.com/hmcts/nodejs-release-spike.git"
+- export GIT_TAG=$(jq -r ".name" package.json)
+- git tag $GIT_TAG -a -m "Generated tag from TravisCI build $TRAVIS_BUILD_NUMBER"
+- git push origin $GIT_TAG
 deploy:
   provider: npm
   email: sateeshkumar.m@gmail.com
